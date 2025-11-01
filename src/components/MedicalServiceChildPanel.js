@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { injectIntl } from "react-intl";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import {
-  formatAmount,
   formatMessage,
-  formatMessageWithValues,
-  decodeId,
   withModulesManager,
   NumberInput,
   Table,
   PublishedComponent,
   AmountInput,
-  TextInput,
-  Error,
 } from "@openimis/fe-core";
 import { Paper, Box } from "@material-ui/core";
 import _ from "lodash";

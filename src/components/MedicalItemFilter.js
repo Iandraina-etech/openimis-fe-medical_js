@@ -153,6 +153,18 @@ class MedicalItemFilter extends Component {
                 </Grid>
               }
             />
+            <Grid item xs={5} className={classes.item}>
+             <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        checked={!!this.filterValue("preAuthorizationRequired")}
+                        onChange={(event) => this.onChangeCheckbox("preAuthorizationRequired", event.target.checked)}
+                      />
+                    }
+                    label={formatMessage(intl, "medical", "preAuthorizationRequired")}
+                  />
+          </Grid>
           </Grid>
 
           <Grid container justify="flex-end">

@@ -13,6 +13,7 @@ const MEDICAL_SERVICES_SUMMARY_PROJECTION = [
   "validityFrom",
   "validityTo",
   "level",
+  "preAuthorizationRequired"
 ];
 const MEDICAL_ITEMS_SUMMARY_PROJECTION = [
   "uuid",
@@ -25,6 +26,7 @@ const MEDICAL_ITEMS_SUMMARY_PROJECTION = [
   "validityFrom",
   "validityTo",
   "package",
+  "preAuthorizationRequired"
 ];
 
 const MEDICAL_SERVICE_FULL_PROJECTION = (mm) => [
@@ -44,6 +46,7 @@ const MEDICAL_SERVICE_FULL_PROJECTION = (mm) => [
   "validityTo",
   "level",
   "category",
+  "preAuthorizationRequired"
 ];
 
 const MEDICAL_ITEM_FULL_PROJECTION = (mm) => [
@@ -61,6 +64,7 @@ const MEDICAL_ITEM_FULL_PROJECTION = (mm) => [
   "validityFrom",
   "validityTo",
   "package",
+  "preAuthorizationRequired"
 ];
 
 function formatGQLBoolean(value){
@@ -104,6 +108,7 @@ export function formatMedicalItemOrServiceGQL(mm, ms) {
     ${ms.package ? `package: "${formatGQLString(ms.package)}"` : ""}
     ${ms.packagetype ? `packagetype: "${formatGQLString(ms.packagetype)}"` : ""}
     ${ms.packagetype ?`manualPrice: "${formatGQLBoolean(ms.manualPrice)}"` : "" }
+    ${ms.preAuthorizationRequired ? `preAuthorizationRequired: ${ms.preAuthorizationRequired}` : ""}
     ${formatDetails("service", ms.serviceserviceSet)}
     ${formatDetails("item", ms.servicesLinked)}
   `;

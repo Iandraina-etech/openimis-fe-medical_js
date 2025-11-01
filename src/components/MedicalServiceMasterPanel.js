@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 
 import { withStyles, withTheme } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Grid, Checkbox, FormControlLabel } from "@material-ui/core";
 
 import {
+  formatMessage,
   AmountInput,
   ErrorBoundary,
   FormPanel,
@@ -76,7 +77,7 @@ class MedicalServiceMasterPanel extends FormPanel {
   }
 
   render() {
-    const { classes, edited, readOnly, isServiceValid, isServiceValidating, serviceValidationError} = this.props;
+    const { intl,classes, edited, readOnly, isServiceValid, isServiceValidating, serviceValidationError} = this.props;
     return (
       <ErrorBoundary>
         <Grid container className={classes.item}>
@@ -221,6 +222,17 @@ class MedicalServiceMasterPanel extends FormPanel {
             />
           </Grid>
         </Grid>
+        <FormControlLabel
+            control={
+              <Checkbox
+                id="medical.preAuthorization"
+                color="primary"
+                checked={edited?.preAuthorizationRequired}
+                onChange={(e) => this.updateAttribute("preAuthorizationRequired", e.target.checked)}
+              />
+            }
+            label={formatMessage(intl, "claim", "pre-authorization-required")}
+          />
       </ErrorBoundary>
     );
   }
