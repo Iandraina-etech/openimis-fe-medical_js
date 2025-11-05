@@ -16,14 +16,15 @@ const ServicePicker = (props) => {
     filterSelectedOptions,
     placeholder,
     extraFragment,
+    preAuth=false,
     multiple,
   } = props;
   const [searchString, setSearchString] = useState(null);
   const { formatMessage } = useTranslations("medical");
 
   const { isLoading, data, error } = useGraphqlQuery(
-    `query ($searchString: String, $pricelistUuid: UUID, $date: Date) {
-      medicalServicesStr(str: $searchString, first: 20, pricelistUuid: $pricelistUuid, date: $date) {
+    `query ($searchString: String, $pricelistUuid: UUID, $date: Date ,$preAuth: Boolean) {
+      medicalServicesStr(str: $searchString, first: 20, pricelistUuid: $pricelistUuid, date: $date,preAuth: $preAuth) {
         edges {
           node {
             id name code price packagetype maximumAmount manualPrice
@@ -52,7 +53,7 @@ const ServicePicker = (props) => {
         }
       }
     }`,
-    { pricelistUuid, searchString, date: toISODate(date) },
+    { pricelistUuid, searchString, date: toISODate(date) , preAuth :preAuth},
     { skip: true },
   );
 

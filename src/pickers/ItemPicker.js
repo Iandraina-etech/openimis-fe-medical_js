@@ -16,14 +16,15 @@ const ItemPicker = (props) => {
     filterSelectedOptions,
     placeholder,
     extraFragment,
+    preAuth=false,
     multiple,
   } = props;
   const [searchString, setSearchString] = useState(null);
   const { formatMessage } = useTranslations("medical");
 
   const { isLoading, data, error } = useGraphqlQuery(
-    `query ($searchString: String, $first: Int, $pricelistUuid: UUID, $date: Date) {
-      medicalItemsStr(str: $searchString, first: $first, pricelistUuid: $pricelistUuid, date: $date) {
+    `query ($searchString: String, $first: Int, $pricelistUuid: UUID, $date: Date ,$preAuth : Boolean ) {
+      medicalItemsStr(str: $searchString, first: $first, pricelistUuid: $pricelistUuid, date: $date ,preAuth: $preAuth ) {
         edges {
           node {
             id name code price quantity maximumAmount
@@ -32,7 +33,7 @@ const ItemPicker = (props) => {
         }
       }
     }`,
-    { pricelistUuid, searchString, first: 20, date: toISODate(date) },
+    { pricelistUuid, searchString, first: 20, date: toISODate(date), preAuth :preAuth },
     { skip: true },
   );
 
